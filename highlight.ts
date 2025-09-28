@@ -127,10 +127,10 @@ async function getConfig(bot: Mwn): Promise<Config> {
 async function init() {
 	const bot = new Mwn({
 		apiUrl: 'https://dev.fandom.com/api.php',
-		password: process.env.HIGHLIGHT_PASSWORD,
+		password: process.env.PASSWORD,
 		silent: true,
 		userAgent: 'Highlight.css updater',
-		username: process.env.HIGHLIGHT_USERNAME,
+		username: process.env.USERNAME,
 	});
 	await bot.login();
 	const config = await getConfig(bot);
