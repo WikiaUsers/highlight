@@ -1,0 +1,35 @@
+{
+	"name": "highlight",
+	"version": "1.0.0",
+	"description": "Cron job updating the stylesheet with highlighted usernames on Fandom.",
+	"keywords": [
+		"fandom",
+		"mediawiki",
+		"github-actions"
+	],
+	"license": "MIT",
+	"author": {
+		"name": "KockaAdmiralac",
+		"email": "git@kocka.tech",
+		"url": "https://kocka.tech"
+	},
+	"scripts": {
+		"start": "tsx highlight.ts",
+        "build": "tsc -p ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/WikiaUsers/highlight.git"
+	},
+	"dependencies": {
+        "ajv": "8.17.1",
+		"mwn": "3.0.1",
+		"node-html-parser": "6.1.5",
+		"typescript": "5.9.2"
+	},
+	"devDependencies": {
+		"@types/node": "24.5.2",
+		"tsx": "4.20.6"
+	},
+	"type": "module"
+}
