@@ -2,6 +2,8 @@ import Ajv, {JSONSchemaType} from 'ajv';
 import {Mwn} from 'mwn';
 import parser from 'node-html-parser';
 
+const USER_AGENT = 'Highlight.css updater';
+
 interface Config {
 	groups: {
 		[key: string]: {
@@ -78,8 +80,15 @@ async function getUsers({groups, overrides}: Config) {
 		searchParams[`groups[${index++}]`] = group;
 		users[group] = [];
 	}
-	const response = await fetch(`https://dev.fandom.com/wiki/Special:ListGlobalUsers?${new URLSearchParams(searchParams)}`);
+	const response = await fetch(`https://dev.fandom.com/wiki/Special:ListGlobalUsers?${new URLSearchParams(searchParams)}`, {
+		headers: {
+			'User-Agent': USER_AGENT,
+		},
+	});
 	const html = await response.text();
+	if (!response.ok) {
+		throw new Error(`failed to fetch user group list: status code ${response.status}, response: ${html}`);
+	}
 	const tree = parser.parse(html);
 	for (const node of tree.querySelectorAll('.list-global-users-members > li')) {
 		const name = node.querySelector('bdi')?.innerText;
@@ -129,7 +138,7 @@ async function init() {
 		apiUrl: 'https://dev.fandom.com/api.php',
 		password: process.env.PASSWORD,
 		silent: true,
-		userAgent: 'Highlight.css updater',
+		userAgent: USER_AGENT, 
 		username: process.env.USERNAME,
 	});
 	await bot.login();
