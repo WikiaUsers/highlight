@@ -74,7 +74,9 @@ const schema: JSONSchemaType<Config> = {
 
 async function getUsers({groups, overrides}: Config) {
 	const users: Record<string, string[]> = {};
-	const searchParams: Record<string, string> = {};
+	const searchParams: Record<string, string> = {
+		limit: '2000',
+	};
 	let index = 0;
 	for (const group in groups) {
 		searchParams[`groups[${index++}]`] = group;
