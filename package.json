@@ -15,7 +15,8 @@
 	},
 	"scripts": {
 		"start": "tsx highlight.ts",
-        "build": "tsc -p ."
+		"build": "tsc -p .",
+		"typecheck": "tsc --noEmit -p ."
 	},
 	"repository": {
 		"type": "git",
